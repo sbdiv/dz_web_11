@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.ext.declarative import declarative_base
+from pydantic import BaseModel
+from datetime import date
 
 Base = declarative_base()
 
@@ -13,3 +15,11 @@ class Contact(Base):
     phone_number = Column(String, index=True)
     birthday = Column(Date)
     additional_data = Column(String, nullable=True)
+
+class ContactCreateUpdate(BaseModel):
+    first_name: str
+    last_name: str
+    email: str
+    phone_number: str
+    birthday: date
+    additional_data: str = None
